@@ -1,9 +1,11 @@
 import requests
 import bs4
 import fake_headers
+import json
 from pprint import pprint
 
 url = 'https://spb.hh.ru/search/vacancy?text=python&area=1&area=2'  # вводим адрес сайта
+url = 'https://spb.hh.ru/search/vacancy?text=python%2C+django%2C+flask&salary=&ored_clusters=true&area=1&area=2&hhtmFrom=vacancy_search_list&hhtmFromLabel=vacancy_search_line'
 
 def gen_headers():
     headers_gen = fake_headers.Headers(os='win', browser='chrome')
@@ -59,4 +61,6 @@ for vacancy_tag in vacancys_data_tags:
 
 pprint(vacancys_data, sort_dicts=False)
 
+with open('vacancys_data.txt', 'w', encoding='utf-8') as outfile:
+    json.dump(vacancys_data, outfile, ensure_ascii=False)
 
